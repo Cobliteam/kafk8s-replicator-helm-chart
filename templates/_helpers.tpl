@@ -24,8 +24,8 @@ If release name contains chart name it will be used as a full name.
 {{- end }}
 
 {{/* Create environment variables for application container */}}
-{{- define "kafk8s-replicator.env" -}}
-{{- range $key, $value := .Values.env }}
+{{- define "kafk8s-replicator.mirrorMakerEnv" -}}
+{{- range $key, $value := .Values.mirrorMakerEnv }}
 - name: {{ $key }}
   value: {{ $value  | quote }}
 {{- end }}

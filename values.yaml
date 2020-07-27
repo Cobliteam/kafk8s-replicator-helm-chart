@@ -17,5 +17,7 @@ mirrorMakerEnv: {}
 
 resources: {}
 
+enablePrometheusJMXExporter: false
+
 strimzi-kafka-operator:
   enabled: false

@@ -107,6 +107,11 @@
                 }
             }
         },
+        "enablePrometheusJMXExporter": {
+            "type": "boolean",
+            "description": "Enable Prometheus JMX exporter on containers",
+            "default": false
+        },
         "strimzi-kafka-operator": {
             "type": "object",
             "required": [

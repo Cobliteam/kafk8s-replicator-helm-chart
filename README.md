@@ -45,6 +45,7 @@ helm install -f path-to-you-values.yaml kafk8s-replicator .
 | resources.limits.memory |false |string | | |Memory limits |
 | resources.requests.cpu |false |string | | |CPU requests |
 | resources.requests.memory |false |string | | |Memory requests |
+| enablePrometheusJMXExporter |false |string | | |Enable/disable [JMX to Prometheus exporter](https://github.com/prometheus/jmx_exporter). Container generate default openmetrics at http://localhost:9404 |
 | strimzi-kafka-operator.enabled |false |boolean | |true |Enable/disable operator installation |
 
 ## Caveats

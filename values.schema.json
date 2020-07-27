@@ -72,6 +72,10 @@
               }
             }
         },
+        "replicationPolicyClass": {
+            "description": "Policy class to be used to generate target topic name",
+            "type": "string"
+        },
         "resources": {
             "type": "object",
             "description": "MirrorMaker2 container k8s resources",

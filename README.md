@@ -46,7 +46,10 @@ helm install -f path-to-you-values.yaml kafk8s-replicator .
 | resources.requests.cpu |false |string | | |CPU requests |
 | resources.requests.memory |false |string | | |Memory requests |
 | enablePrometheusJMXExporter |false |string | | |Enable/disable [JMX to Prometheus exporter](https://github.com/prometheus/jmx_exporter). Container generate default openmetrics at http://localhost:9404 |
+| replicationPolicyClass |false |string | | |Policy class to be used to generate target topic name |
 | strimzi-kafka-operator.enabled |false |boolean | |true |Enable/disable operator installation |
 
 ## Caveats
 Helm 3 version of strimzi is in release condidate. In order to use is as a dependency, we are linking projects through git submodules.
+
+We are waiting for https://github.com/strimzi/strimzi-kafka-operator/issues/2546 resolution to provide a way to replicate topics without prefixes.

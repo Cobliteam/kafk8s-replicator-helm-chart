@@ -23,6 +23,9 @@ spec:
     sourceConnector:
       config:
         sync.topic.acls.enabled: {{ .Values.syncTopicAcls | ternary "true" "false" }}
+        {{- if .Values.replicationPolicyClass }}
+        replication.policy.class: {{ .Values.replicationPolicyClass }}
+        {{- end }}
   {{- if .Values.mirrorMakerEnv }}
   template:
     connectContainer:

@@ -30,7 +30,7 @@ spec:
   template:
     connectContainer:
       env:
-        {{- include "kafk8s-replicator.mirrorMaker2Env" . | trim | nindent 12  }}
+        {{- include "kafk8s-replicator.mirrorMakerEnv" . | trim | nindent 12  }}
   {{- end }}
   resources:
     {{- toYaml .Values.resources | nindent 4 }}

@@ -8,6 +8,9 @@ This Helm Chart uses [strimzi kafka operator](https://github.com/strimzi/strimzi
 | Helm v3 compatible only | 
 | ---| 
 
+| target topics will be replicated with `source.` prefix | 
+| ---| 
+
 ## Usage
 Create a values.yaml file:
 ```yaml

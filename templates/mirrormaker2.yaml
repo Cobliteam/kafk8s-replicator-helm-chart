@@ -1,0 +1,33 @@
+apiVersion: kafka.strimzi.io/v1alpha1
+kind: KafkaMirrorMaker2
+metadata:
+  name: {{ include "kafk8s-replicator.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  version: {{ .Values.kafkaConnectVersion }}
+  replicas: {{ .Values.replicaCount }}
+  connectCluster: target
+  {{- if .Values.customImage }}
+  image: "{{ .Values.customImage.repository }}:{{ .Values.customImage.tag }}"
+  {{- end }}
+  clusters:
+  - alias: source
+    bootstrapServers: {{ join "," .Values.sourceBootstrapServers }}
+  - alias: target
+    bootstrapServers: {{ join "," .Values.targetBootstrapServers }}
+  mirrors:
+  - sourceCluster: source
+    targetCluster: target
+    topicsPattern: ".*"
+    groupsPattern: ".*"
+    sourceConnector:
+      config:
+        sync.topic.acls.enabled: {{ .Values.syncTopicAcls | ternary "true" "false" }}
+  {{- if .Values.mirrorMakerEnv }}
+  template:
+    connectContainer:
+      env:
+        {{- include "kafk8s-replicator.mirrorMaker2Env" . | trim | nindent 12  }}
+  {{- end }}
+  resources:
+    {{- toYaml .Values.resources | nindent 4 }}

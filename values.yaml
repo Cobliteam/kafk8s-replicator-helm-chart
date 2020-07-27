@@ -1,0 +1,21 @@
+# Default values for kafk8s-replicator
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+kafkaConnectVersion: 2.5.0
+
+sourceBootstrapServers:
+  - my-source-kafka:9092
+targetBootstrapServers:
+  - my-target-kafka:9092
+
+syncTopicAcls: true
+
+mirrorMakerEnv: {}
+
+resources: {}
+
+strimzi-kafka-operator:
+  enabled: false

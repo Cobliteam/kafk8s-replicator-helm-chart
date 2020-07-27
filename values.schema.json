@@ -1,0 +1,124 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "description": "Values schema for kafk8s-replicator",
+    "default": {},
+    "required": [
+        "sourceBootstrapServers",
+        "targetBootstrapServers"
+    ],
+    "properties": {
+        "replicaCount": {
+            "type": "integer",
+            "description": "Number of MirrorMaker2 replicas",
+            "default": 1
+        },
+        "kafkaConnectVersion": {
+            "type": "string",
+            "description": "Kafka Connect version to use",
+            "default": "2.5.0"
+        },
+        "customImage": {
+            "type": "object",
+            "description": "Custom image containing MirrorMaker2",
+            "required": [
+                "repository",
+                "tag"
+            ],
+            "properties": {
+                "repository": {
+                    "type": "string",
+                    "description": "Image repository"
+                },
+                "tag": {
+                    "type": "string",
+                    "description": "Image tag"
+                }
+            }
+        },
+        "sourceBootstrapServers": {
+            "type": "array",
+            "description": "Souce kafka servers",
+            "minItems": 1,
+            "items": {
+                "type": "string"
+            }
+        },
+        "targetBootstrapServers": {
+            "type": "array",
+            "description": "Target kafka servers",
+            "minItems": 1,
+            "items": {
+                "type": "string"
+            }
+        },
+        "syncTopicAcls": {
+            "type": "boolean",
+            "description": "Sync topics ACLs",
+            "default": true
+        },
+        "mirrorMakerEnv": {
+            "description": "Environment variables to be send to MirrorMaker2 image",
+            "type": "object",
+            "propertyNames": {
+              "pattern": "^[A-Za-z_][A-Za-z0-9_.-]*$"
+            },
+            "patternProperties": {
+              "^[A-Za-z_][A-Za-z0-9_.-]*$": {
+                "oneOf": [
+                  {"type": "string"},
+                  {"type": "integer"}
+                ]
+              }
+            }
+        },
+        "resources": {
+            "type": "object",
+            "description": "MirrorMaker2 container k8s resources",
+            "default": {},
+            "properties": {
+                "limits": {
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "cpu": {
+                            "type": "string",
+                            "description": "CPU limits"
+                        },
+                        "memory": {
+                            "type": "string",
+                            "description": "Memory limits"
+                        }
+                    }
+                },
+                "requests": {
+                    "type": "object",
+                    "default": {},
+                    "properties": {
+                        "cpu": {
+                            "type": "string",
+                            "description": "CPU requests"
+                        },
+                        "memory": {
+                            "type": "string",
+                            "description": "Memory requests"
+                        }
+                    }
+                }
+            }
+        },
+        "strimzi-kafka-operator": {
+            "type": "object",
+            "required": [
+                "enabled"
+            ],
+            "properties": {
+                "enabled": {
+                    "type": "boolean",
+                    "description": "Enable/disable operator installation",
+                    "default": true
+                }
+            }
+        }
+    }
+}

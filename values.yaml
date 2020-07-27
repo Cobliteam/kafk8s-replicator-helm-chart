@@ -20,4 +20,4 @@ resources: {}
 enablePrometheusJMXExporter: false
 
 strimzi-kafka-operator:
-  enabled: false
+  enabled: true
